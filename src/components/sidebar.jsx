@@ -15,12 +15,24 @@ const MainLayout = () => {
   const [items, setItems] = useState([]);
 
   const [selectedItem, setSelectedItem] = useState(null);
- 
+  
+  const handleItemClick = (itemId) => {
+    if (selectedItem?.id === itemId) {
+      setSelectedItem(null);
+      setActiveTab("container");
+    } else {
+      const item = items.find((item) => item.id === itemId);
+      setSelectedItem(item);
+      setActiveTab("items");
+    }
+  };
+  
+
   const addItem = () => {
     const newItem = {
       id: Date.now(),
       order: 0,
-      width: 96,
+      width: 110,
       height: 68,
       flexGrow: 0,
       flexShrink: 1,
@@ -154,7 +166,7 @@ const MainLayout = () => {
               <option value="space-between">space-between</option>
             </select>
           </div>
-        ) : selectedItem ? (
+        ) : selectedItem  ? (
           <div className="shadow rounded p-3 mb-20">
             <h2 className="text-lg font-semibold mb-2">Edit Item</h2>
 
@@ -249,7 +261,10 @@ const MainLayout = () => {
         {items.map((item, index) => (
           <div
             key={item.id}
-            className="flex items-center justify-center border rounded-lg shadow-md cursor-pointer relative p-2"
+            className={`flex items-center justify-center border rounded-lg shadow-md cursor-pointer relative p-2 ${
+              selectedItem?.id === item.id ? 'border-2 border-green-500' : ''
+            }`}
+            
             style={{
               width: `${item.width}px`,
               height: `${item.height}px`,
@@ -260,30 +275,31 @@ const MainLayout = () => {
               flexBasis: item.flexBasis,
               backgroundColor: "#E0F7FA",
               margin: "12px",
-              border: "2px solid #0288D1",
               transition: "all 0.3s ease",
             }}
-            onClick={() => setSelectedItem(item)}
+            onClick={() => handleItemClick(item.id)}
           >
             <span>Item {index}</span>
-            <button
-              className="absolute top-1 right-8 text-blue-600"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedItem(item);
-              }}
-            >
-              <Pencil className="w-5 h-4 cursor-pointer shadow-lg transform transition duration-300 hover:scale-110 border rounded-full border-blue-100 hover:bg-blue-300 hover:text-blue-800" />
-            </button>
-            <button
-              className="absolute top-1 right-1 text-red-600"
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteItem(item.id);
-              }}
-            >
-              <Trash className="w-5 h-4 shadow-lg transform transition duration-300 hover:scale-110 hover:bg-red-200 border border-blue-100 rounded-full hover:text-red-500" />
-            </button>
+            <div className="absolute right-1 top-1 mt-2 flex flex-col items-center">
+    <button
+      className="text-blue-600 mb-1 hover:text-blue-800 transition-all duration-300"
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedItem(item);
+      }}
+    >
+      <Pencil className="w-5 h-4 ms-3 cursor-pointer shadow-lg transform transition duration-300 hover:scale-110 border rounded-full border-blue-100 hover:bg-blue-300 hover:text-blue-800" />
+    </button>
+    <button
+      className="text-red-600 mt-1 hover:text-red-800 transition-all duration-300"
+      onClick={(e) => {
+        e.stopPropagation();
+        deleteItem(item.id);
+      }}
+    >
+      <Trash className="w-5 h-4 ms-3 shadow-lg transform transition duration-300 hover:scale-110 hover:bg-red-200 border border-blue-100 rounded-full hover:text-red-500" />
+    </button>
+            </div>
           </div>
         ))}
       </div>
