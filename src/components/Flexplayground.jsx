@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Pencil, Trash } from "lucide-react";
 
-const MainLayout = () => {
-  // container styling usestates
+const Flexplayground = () => {
   const [flexDirection, setFlexDirection] = useState("row");
   const [flexWrap, setFlexWrap] = useState("wrap");
   const [alignItems, setAlignItems] = useState("flex-start");
   const [alignContent, setAlignContent] = useState("flex-start");
   const [justifyContent, setJustifyContent] = useState("flex-start");
-  // .....
+  // ..... 
 
   const [activeTab, setActiveTab] = useState("container");
 
@@ -66,7 +65,7 @@ const MainLayout = () => {
   return (
     <div className="flex h-screen bg-white overflow-hidden pb-5">
       {/* Sidebar */}
-      <div className="w-1/3 p-4 border-r bg-gray-300 overflow-y-auto">
+      <div className="w-1/3 p-4 border-r bg-gray-800 overflow-y-auto">
         <div className="flex gap-3 mb-4">
           <button
             className={`flex-1 p-3 rounded font-bold ${
@@ -93,21 +92,21 @@ const MainLayout = () => {
         {activeTab === "container" ? (
           <div className="h-full shadow rounded p-3">
             <button
-              className="p-4 px-20 cursor-pointer ms-10 mt-3 bg-blue-500 text-white font-bold hover:bg-blue-600 rounded-lg transition-all"
+              className="p-4 px-22 cursor-pointer ms-22 mt-3 bg-blue-500 text-white font-bold hover:bg-blue-600 rounded-lg transition-all"
               onClick={addItem}
             >
               Add Item
             </button>
 
-            <p className="text-blue-900 font-medium bg-blue-200 p-2 my-5">
+            <p className="text-blue-900 font-medium bg-blue-200 p-10 my-5">
               Edit properties of the flex container here. Click an item to the
               right to edit its properties.
             </p>
 
-            <h2 className="text-lg font-semibold my-4">Container Settings</h2>
-            <label className="block mb-2">flex-direction</label>
+            <h2 className="text-lg text-white font-semibold my-4">Container Settings</h2>
+            <label className="block text-slate-200 mb-4">flex-direction</label>
             <select
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-2 text-slate-200 border rounded mb-3"
               value={flexDirection}
               onChange={(e) => setFlexDirection(e.target.value)}
             >
@@ -117,9 +116,9 @@ const MainLayout = () => {
               <option value="column-reverse">column-reverse</option>
             </select>
 
-            <label className="block mb-2">flex-wrap</label>
+            <label className="blocktext-slate-200 text-slate-200 mb-4 mt-4">flex-wrap</label>
             <select
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-2 text-slate-200 border rounded mt-4 mb-3"
               value={flexWrap}
               onChange={(e) => setFlexWrap(e.target.value)}
             >
@@ -128,9 +127,9 @@ const MainLayout = () => {
               <option value="wrap-reverse">wrap-reverse</option>
             </select>
 
-            <label className="block mb-2">justify-content</label>
+            <label className="block text-slate-200 mb-2 mt-3">justify-content</label>
             <select
-              className="w-full p-2 border rounded"
+              className="w-full p-2 mt-2 mb-3 text-slate-200 border rounded"
               value={justifyContent}
               onChange={(e) => setJustifyContent(e.target.value)}
             >
@@ -141,9 +140,9 @@ const MainLayout = () => {
               <option value="space-between">space-between</option>
             </select>
 
-            <label className="block mb-2 mt-2">align-items</label>
+            <label className="block text-slate-200 mb-4 mt-2">align-items</label>
             <select
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-2 border text-white rounded mb-3"
               value={alignItems}
               onChange={(e) => setAlignItems(e.target.value)}
             >
@@ -153,9 +152,9 @@ const MainLayout = () => {
               <option value="stretch">stretch</option>
             </select>
 
-            <label className="block mb-2">align-content</label>
+            <label className="block text-slate-200 mt-2 mb-4">align-content</label>
             <select
-              className="w-full p-2 border rounded mb-20 "
+              className="w-full p-2 text-slate-200 border rounded mb-20 "
               value={alignContent}
               onChange={(e) => setAlignContent(e.target.value)}
             >
@@ -168,54 +167,54 @@ const MainLayout = () => {
           </div>
         ) : selectedItem  ? (
           <div className="shadow rounded p-3 mb-20">
-            <h2 className="text-lg font-semibold mb-2">Edit Item</h2>
+            <h2 className="text-lg font-semibold text-white mb-2">Edit Item</h2>
 
-            <label className="block mb-2">Order</label>
+            <label className="block text-slate-200 mb-2">Order</label>
             <input
               type="number"
               defaultValue={0}
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-2 text-slate-200 border rounded mb-3"
               onChange={(e) =>
                 updateItem(selectedItem.id, "order", Number(e.target.value))
               }
             />
 
-            <label className="block mb-2">Width (px)</label>
+            <label className="block text-slate-200 mb-2">Width (px)</label>
             <input
               type="number"
               value={selectedItem.width}
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-2 text-slate-200 border rounded mb-3"
               onChange={(e) =>
                 updateItem(selectedItem.id, "width", Number(e.target.value))
               }
             />
 
-            <label className="block mb-2">Height (px)</label>
+            <label className="block text-slate-200 mb-2">Height (px)</label>
             <input
               type="number"
               value={selectedItem.height}
-              className="w-full p-2 border rounded"
+              className="w-full text-slate-200 p-2 border rounded"
               onChange={(e) =>
                 updateItem(selectedItem.id, "height", Number(e.target.value))
               }
             />
             {/* Flex Grow */}
-            <label className="block mb-2 mt-2">Flex Grow</label>
+            <label className="block text-slate-200 mb-2 mt-2">Flex Grow</label>
             <input
               type="number"
               value={selectedItem.flexGrow}
-              className="w-full p-2 border rounded mb-3"
+              className="w-full text-slate-200 p-2 border rounded mb-3"
               onChange={(e) =>
                 updateItem(selectedItem.id, "flexGrow", Number(e.target.value))
               }
             />
 
             {/* Flex Shrink */}
-            <label className="block mb-2">Flex Shrink</label>
+            <label className="block text-slate-200 mb-2">Flex Shrink</label>
             <input
               type="number"
               value={selectedItem.flexShrink}
-              className="w-full p-2 border rounded mb-3"
+              className="w-full text-slate-200 p-2 border rounded mb-3"
               onChange={(e) =>
                 updateItem(
                   selectedItem.id,
@@ -225,9 +224,9 @@ const MainLayout = () => {
               }
             />
 
-            <label className="block mb-2">Align Self</label>
+            <label className="block text-slate-200 mb-2">Align Self</label>
             <select
-              className="w-full p-2 border rounded"
+              className="w-full p-2 text-slate-200 border rounded"
               onChange={(e) =>
                 updateItem(selectedItem.id, "alignSelf", e.target.value)
               }
@@ -241,7 +240,7 @@ const MainLayout = () => {
             </select>
           </div>
         ) : (
-          <p className="text-blue-900 font-medium bg-blue-200 p-2 my-5">
+          <p className="text-blue-900 font-medium bg-blue-200 p-10 my-5">
             Click a flex item to edit its styles.
           </p>
         )}
@@ -249,7 +248,7 @@ const MainLayout = () => {
 
       {/* Main Flex Container */}
       <div
-        className="w-full bg-white p-4 flex items-center justify-center flex-wrap border"
+        className="w-2/3  border-2 m-2 border-black p-4 flex items-center justify-center flex-wrap"
         style={{
           flexDirection,
           flexWrap,
@@ -264,7 +263,7 @@ const MainLayout = () => {
             className={`flex items-center justify-center border rounded-lg shadow-md cursor-pointer relative p-2 ${
               selectedItem?.id === item.id ? 'border-2 border-green-500' : ''
             }`}
-            
+
             style={{
               width: `${item.width}px`,
               height: `${item.height}px`,
@@ -308,4 +307,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default Flexplayground;
