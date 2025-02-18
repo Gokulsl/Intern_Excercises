@@ -63,7 +63,7 @@ const Flexplayground = () => {
     }
   };
   return (
-    <div className="flex h-screen bg-white overflow-hidden pb-5">
+    <div className="flex h-screen bg-white pb-5">
       {/* Sidebar */}
       <div className="w-1/3 p-4 border-r bg-gray-800 overflow-y-auto">
         <div className="flex gap-3 mb-4">
@@ -98,7 +98,7 @@ const Flexplayground = () => {
               Add Item
             </button>
 
-            <p className="text-blue-900 font-medium bg-blue-200 p-10 my-5">
+            <p className="text-blue-900 font-medium bg-blue-200 p-6 my-5">
               Edit properties of the flex container here. Click an item to the
               right to edit its properties.
             </p>
@@ -248,7 +248,7 @@ const Flexplayground = () => {
 
       {/* Main Flex Container */}
       <div
-        className="w-2/3  border-2 m-2 border-black p-4 flex items-center justify-center flex-wrap"
+        className="w-2/3  border-2 m-2 border-black p-4 overflow-hidden flex items-center justify-center flex-wrap"
         style={{
           flexDirection,
           flexWrap,
