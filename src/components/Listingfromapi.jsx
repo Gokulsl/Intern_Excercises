@@ -7,12 +7,12 @@ const Listingfromapi = () => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
       .then((data) => setData(data))
-      .catch(console.error("Error"));
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (
     <div >
-      <div className="flex justify-around pt-6 pb-6 items-center bg-purple-400 flex-wrap">
+      <div className="flex justify-around pt-6 pb-6 items-center bg-gradient-to-br  from-purple-500 to-purple-700 flex-wrap">
         {!data[0] ?(<div className="flex justify-around h-160 items-center flex-wrap"><Loading/></div>):
         (data.map((c, index) =>
           index < 100  ? (

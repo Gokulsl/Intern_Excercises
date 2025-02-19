@@ -12,9 +12,9 @@ const Checkbox = ({ name, label, checked, onChange, disabled = false, className 
           checked={checked}
           onChange={onChange}
           disabled={disabled}
-          className="w-5 h-5 accent-blue-600 border-blue-300 rounded focus:ring-blue-400"
+          className="w-5 h-5 accent-orange-400 border-orange-300 rounded focus:ring-orange-400"
         />
-        <span className="text-gray-800">{label}</span>
+        <span className="text-slate-300">{label}</span>
       </label>
     </div>
   );

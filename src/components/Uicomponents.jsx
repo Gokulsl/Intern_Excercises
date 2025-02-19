@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import Checkbox from "./Checkbox";
 import Dropdown from "./Dropdownmenu";
@@ -7,29 +7,30 @@ import Chip from "./Chip";
 import Typography from "./Typography";
 import Dialog from "./Dialog";
 import Loading from "./Loading";
+import ComponentCard from "./Card";
 
-const Uicomponents = () => {
-  // states for checkbox and dropdown
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
+const UIComponents = () => {
+  const [checkboxState, setCheckboxState] = useState({
+    webDev: false,
+    backendDev: false,
+    cyberSecurity: false,
+  });
+
+  const handleCheckboxChange = (name) => {
+    setCheckboxState((prev) => ({ ...prev, [name]: !prev[name] }));
+  };
 
   const [selected, setSelected] = useState("");
-  // options for dropdown
   const options = [
-    { value: "option1", label: "Option 1" ,to:""},
-    { value: "option2", label: "Option 2" ,to:""},
-    { value: "option3", label: "Option 3" ,to:""},
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
   ];
-  // for chip component
+
   const [chips, setChips] = useState(["React", "Tailwind", "JavaScript"]);
+  const handleRemove = (chip) => setChips(chips.filter((c) => c !== chip));
 
-  const handleRemove = (chip) => {
-    setChips(chips.filter((c) => c !== chip));
-  };
-  //for dialog component
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
 
@@ -37,174 +38,89 @@ const Uicomponents = () => {
     alert("Confirmed!");
     closeDialog();
   };
-//for loading component
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000); // Simulating a 3-second loading time
-  }, []);
 
   return (
-    <div>
-      <div className="flex flex-wrap justify-between pb-20 items-center bg-cyan-400 h-screen  p-5">
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-2 font-bold">Button</h1>
-          <div className="grid grid-cols-2 ">
-            <Button
-              text="Primary"
-              variant="primary"
-              className="m-2"
-              onClick={() => alert("Primary Button Clicked")}
-            />
-            <Button
-              text="Sec"
-              variant="secondary"
-              className="m-2"
-              onClick={() => alert("Secondary Button Clicked")}
-            />
-            <Button
-              text="Outline"
-              variant="outline"
-              className="m-2"
-              onClick={() => alert("Outlined Button Clicked")}
-            />
-            <Button
-              text="Disabled"
-              variant="disabled"
-              disabled
-              className="m-2"
-            />
+    <div className="bg-gradient-to-br  from-purple-500 to-purple-700  min-h-screen flex flex-col items-center p-10 pb-20">
+      <h1 className="text-4xl font-mont font-bold text-white pb-13 pt-4"> UI Components Showcase </h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
+        
+        {/* Buttons */}
+        <ComponentCard title="Button">
+          <div className="grid grid-cols-2 gap-4 w-full">
+            <Button text="Primary" variant="primary" onClick={() => alert("Primary Clicked")} />
+            <Button text="Secondary" variant="secondary" onClick={() => alert("Secondary Clicked")} />
+            <Button text="Outline" variant="outline" onClick={() => alert("Outlined Clicked")} />
+            <Button text="Disabled" variant="disabled" disabled />
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-2 font-bold">Checkbox</h1>
-          <div className="grid grid-cols-1">
-            <Checkbox
-              label="Web development"
-              name="primary"
-              checked={checked1}
-              onChange={() => {
-                setChecked1(!checked1);
-              }}
-              className="m-2"
-            />
-            <Checkbox
-              label="Backend development"
-              name="secondary"
-              checktype="secondary"
-              checked={checked2}
-              onChange={() => {
-                setChecked2(!checked2);
-              }}
-              className="m-2"
-            />
-            <Checkbox
-              label="Cyber security"
-              name="secondary"
-              checktype="secondary"
-              checked={checked3}
-              disabled
-              onChange={() => {
-                setChecked3(!checked3);
-              }}
-              className="m-2"
-            />
+        </ComponentCard>
+
+        {/* Checkboxes */}
+        <ComponentCard title="Checkbox">
+          <div className="flex flex-col gap-4">
+            <Checkbox label="Web Development" checked={checkboxState.webDev} onChange={() => handleCheckboxChange("webDev")} />
+            <Checkbox label="Backend Development" checked={checkboxState.backendDev} onChange={() => handleCheckboxChange("backendDev")} />
+            <Checkbox label="Cyber Security" checked={checkboxState.cyberSecurity} disabled />
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-2 font-bold mb-3">Dropdown</h1>
-          <div className="grid grid-cols-1 ms-7">
-            <Dropdown
-              options={options}
-              className="w-40 text-gray-800 bg-slate-200  "
-            />
-            <Dropdown
-              options={options}
-              disabled
-              className="w-40 text-gray-800 bg-slate-200  mt-2 "
-            />
+        </ComponentCard>
+
+        {/* Dropdowns */}
+        <ComponentCard title="Dropdown">
+          <div className="flex flex-col gap-2">
+            <Dropdown options={options} title="Click me" value={selected} onChange={setSelected} className="w-40 bg-orange-300 " />
+            <Dropdown options={options} title="Click me" disabled className="w-40 bg-gray-200" />
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-2 font-bold">Textfield</h1>
-          <div className="grid grid-cols-1">
-            <Textfield
-              label="Name"
-              placeholder="Enter your name"
-              className="m-2"
-            />
-            <Textfield
-              label="Age"
-              placeholder="-- No need --"
-              className="m-2"
-              disabled
-            />
+        </ComponentCard>
+
+        {/* Textfields */}
+        <ComponentCard title="Textfield">
+          <div className="flex flex-col gap-2 w-full ms-5">
+            <Textfield label="Name" placeholder="Enter your name" />
+            <Textfield label="Age" placeholder="Enter your age" disabled  />
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-2 font-bold">Chip</h1>
-          <div className="grid grid-cols-1">
+        </ComponentCard>
+
+        {/* Chips */}
+        <ComponentCard title="Chip">
+          <div className="flex flex-wrap gap-2">
             {chips.map((chip) => (
-              <Chip
-                key={chip}
-                label={chip}
-                onRemove={() => handleRemove(chip)}
-                color="blue"
-              />
+              <Chip key={chip} label={chip} onRemove={() => handleRemove(chip)} color="purple" />
             ))}
             <Chip label="Static Chip" color="red" />
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-4 font-bold ">Typography</h1>
-          <div className="grid grid-cols-1">
-            <Typography variant="h4" className="text-center">
-              This is a Heading 1
-            </Typography>
-            <Typography variant="h2" className="text-center mt-2">
-              This is a Heading 2
-            </Typography>
+        </ComponentCard>
+
+        {/* Typography */}
+        <ComponentCard title="Typography">
+          <div className="text-center">
+            <Typography variant="body2" className="text-slate-300 mb-1">This is a Heading 1</Typography>
+            <Typography variant="h4" className="text-slate-300">This is a Heading 1</Typography>
+            <Typography variant="h2" className="text-slate-300 mt-2">This is a Heading 2</Typography>
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-10 font-bold">Dialog</h1>
-          <div className="grid grid-cols-1">
-            <button
-              onClick={openDialog}
-              className="px-6 py-3 bg-blue-500 text-white cursor-pointer rounded-lg hover:bg-blue-600"
-            >
-              submit
-            </button>
-            <Dialog
-              isOpen={isDialogOpen}
-              onClose={closeDialog}
-              title="Confirm Action"
-              confirmText="Yes"
-              cancelText="No"
-              onConfirm={handleConfirm}
-            >
-              <p>Are you sure you want to proceed?</p>
-            </Dialog>
+        </ComponentCard>
+
+        {/* Dialog */}
+        <ComponentCard title="Dialog">
+          <button
+            onClick={openDialog}
+            className="px-6 py-2 bg-purple-600 text-white cursor-pointer rounded-lg hover:bg-purple-400 mt-2"
+          >
+            Open Dialog
+          </button>
+          <Dialog isOpen={isDialogOpen} onClose={closeDialog} title="Confirm Action" confirmText="Yes" cancelText="No" onConfirm={handleConfirm}>
+            <p>Are you sure you want to proceed?</p>
+          </Dialog>
+        </ComponentCard>
+
+        {/* Loading */}
+        <ComponentCard title="Loading">
+          <div className="text-center">
+            <Loading message="Loading data..." color="border-orange-500" />
           </div>
-        </div>
-        <div className="p-10 border-2 border-black bg-white w-80 h-60 rounded-lg drop-shadow-2xl">
-          <h1 className="text-center pb-2 font-bold">Loading</h1>
-          <div className="grid grid-cols-1 text-center mt-10">
-            {isLoading ? (
-              <Loading
-                message="Please wait, data is loading..."
-                color="border-green-500"
-              />
-            ) : (
-              <div className="text-xl font-bold">Content Loaded!</div>
-            )}
-          </div>
-        </div>
+        </ComponentCard>
       </div>
     </div>
   );
 };
 
-export default Uicomponents;
+export default UIComponents;
