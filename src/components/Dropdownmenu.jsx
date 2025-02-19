@@ -1,20 +1,52 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { ChevronDownIcon } from "lucide-react";
 
-const Dropdownmenu = ({ options, selected, onChange, disabled = false, className = "" }) => {
+const Dropdownmenu = ({ options, disabled = false, className = "" }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={`relative ${className}`}>
-      <select
-        value={selected}
-        onChange={(e) => onChange(e.target.value)}
+    <div ref={dropdownRef} className={`relative rounded ${className}`}>
+      <button
+        className={`flex w-full justify-center gap-x-1.5 rounded px-3 py-2 font-semibold shadow-md ${
+          disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-300"
+        } ${className}`}
+        onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
-        className={`w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:opacity-50 ${disabled ? "cursor-not-allowed" : "cursor-pointer"} ${className}`}
       >
-        {options.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        Click me
+        <ChevronDownIcon className="mr-1 w-5 h-5 text-black mt-0.5" />
+      </button>
+      {isOpen && (
+        <div
+          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded bg-white border-2 border-gray-200 shadow-lg transition-opacity-10"
+        >
+            {options.map((option, index) => (
+              <h1 key={index} value={option.value} role="menuitem" className="block px-4 py-2 text-md text-black hover:bg-gray-100 hover:text-gray-600">
+                <Link
+                  to={option.to}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {option.label}
+                </Link>
+              </h1>
+            ))}
+        </div>
+      )}
     </div>
   );
 };

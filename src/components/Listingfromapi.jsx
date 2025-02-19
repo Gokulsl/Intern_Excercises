@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Loading from "./Loading";
 const Listingfromapi = () => {
   const [data, setData] = useState([]);
 
@@ -13,7 +13,7 @@ const Listingfromapi = () => {
   return (
     <div >
       <div className="flex justify-around pt-6 pb-6 items-center bg-purple-400 flex-wrap">
-        {!data[0] ?(<div className="flex justify-around h-160 items-center flex-wrap"><p className="text-3xl">Loading</p></div>):
+        {!data[0] ?(<div className="flex justify-around h-160 items-center flex-wrap"><Loading/></div>):
         (data.map((c, index) =>
           index < 100  ? (
             <div key={index} className="m-3 border-2 border-black bg-gray-800 w-80 h-30">

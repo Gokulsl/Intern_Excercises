@@ -12,7 +12,7 @@ const Typography = ({ variant, children, className = "" }) => {
     subtitle1: "text-lg font-semibold text-gray-700",
     subtitle2: "text-md font-medium text-gray-600",
   };
-
+console.log(children)
   return (
     <div className={`${typographyStyles[variant]} ${className}`}>
       {children}
