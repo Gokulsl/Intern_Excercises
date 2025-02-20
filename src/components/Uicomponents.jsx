@@ -26,6 +26,7 @@ const UIComponents = () => {
     { value: "option2", label: "Option 2" },
     { value: "option3", label: "Option 3" },
   ];
+  const [input1, setInput1] = useState("");
 
   const [chips, setChips] = useState(["React", "Tailwind", "JavaScript"]);
   const handleRemove = (chip) => setChips(chips.filter((c) => c !== chip));
@@ -75,8 +76,16 @@ const UIComponents = () => {
         {/* Textfields */}
         <ComponentCard title="Textfield">
           <div className="flex flex-col gap-2 w-full ms-5">
-            <Textfield label="Name" placeholder="Enter your name" />
-            <Textfield label="Age" placeholder="Enter your age" disabled  />
+          <Textfield 
+    label="Name" 
+    required 
+    value={input1} 
+    className="bg-slate-200 text-gray-700"
+    placeholder="Enter your name" 
+    onChange={(e) => setInput1(e.target.value)} 
+/>
+
+            <Textfield label="Age" placeholder="Enter your age" className="bg-slate-200 text-gray-700" disabled  />
           </div>
         </ComponentCard>
 
@@ -115,7 +124,7 @@ const UIComponents = () => {
         {/* Loading */}
         <ComponentCard title="Loading">
           <div className="text-center">
-            <Loading message="Loading data..." color="border-orange-500" />
+            <Loading message="Loading data..." size={"w-10 h-10"}color="border-orange-500" />
           </div>
         </ComponentCard>
       </div>

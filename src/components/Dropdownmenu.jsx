@@ -4,8 +4,12 @@ import { ChevronDownIcon } from "lucide-react";
 
 const Dropdownmenu = ({ options, disabled = false, className = "" , title=""}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [Exercise, setExercise] = useState("Exercises");
   const dropdownRef = useRef(null);
-
+  function handleButtonchanges(value){
+    setIsOpen(false);
+    setExercise(value);
+  }
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -21,13 +25,13 @@ const Dropdownmenu = ({ options, disabled = false, className = "" , title=""}) =
   return (
     <div ref={dropdownRef} className={`relative rounded ${className}`}>
       <button
-        className={`flex w-full justify-center gap-x-1.5 rounded px-3 text-slate-900 py-2 font-semibold shadow-md ${
+        className={`flex  justify-center gap-x-1.5 rounded px-3 text-slate-900 py-2 font-semibold shadow-md ${
           disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer "
         } ${className}`}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
       >
-        {title}
+        {Exercise}
         <ChevronDownIcon className="mr-1 w-5 h-5 text-black mt-0.5" />
       </button>
       {isOpen && (
@@ -39,7 +43,7 @@ const Dropdownmenu = ({ options, disabled = false, className = "" , title=""}) =
                 <Link
                   to={option.to}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsOpen(false)}
+                  onClick={()=>handleButtonchanges(option.label)}
                 >
                   {option.label}
                 </Link>

@@ -11,7 +11,7 @@ const Textfield = ({
 }) => {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={label} className="text-sm font-medium text-slate-300">
+      <label htmlFor={label} className="text-md font-medium text-slate-300  mt-3">
         {label}
       </label>
       <input
