@@ -49,10 +49,10 @@ const UIComponents = () => {
         {/* Buttons */}
         <ComponentCard title="Button">
           <div className="grid grid-cols-2 gap-4 w-full">
-            <Button text="Primary" variant="primary" onClick={() => alert("Primary Clicked")} />
-            <Button text="Secondary" variant="secondary" onClick={() => alert("Secondary Clicked")} />
-            <Button text="Outline" variant="outline" onClick={() => alert("Outlined Clicked")} />
-            <Button text="Disabled" variant="disabled" disabled />
+            <Button text="Primary" variant="primary" onClick={() => alert("Primary Clicked")} >Primary</Button>
+            <Button text="Secondary" variant="secondary" onClick={() => alert("Secondary Clicked")} >Secondary</Button>
+            <Button text="Outline" variant="outline" onClick={() => alert("Outlined Clicked")} >Outline</Button>
+            <Button text="Disabled" variant="disabled" disabled >Disabled</Button>
           </div>
         </ComponentCard>
 

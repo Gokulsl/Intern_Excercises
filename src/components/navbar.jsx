@@ -7,6 +7,7 @@ const Navbar = () => {
     {value:"Api-fetch",label:"Api-fetch",to:"/listing"},
     {value:"Uicomponents",label:"Uicomponents",to:"/ui"},
     {value:"Login",label:"Login",to:"/login"},
+    {value:"Weather",label:"Weather",to:"/weather"},
   ]
   return (
     <nav className="top-0 left-0 w-full flex items-center justify-between bg-gray-800 h-20 px-6 shadow-md">

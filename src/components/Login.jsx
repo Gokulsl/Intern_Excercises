@@ -33,12 +33,12 @@ const Login = () => {
 
   return (
     <div className='flex justify-center items-center h-screen bg-gradient-to-br from-purple-500 to-purple-700'>
-      <div className='border-2 shadow rounded-lg border-purple-300 bg-gray-900 py-12 px-8 w-[30rem]'>
+      <div className='border-2 shadow-purple-950 shadow-2xl rounded-lg border-purple-300 bg-gray-900 py-12 px-8 w-[30rem]'>
         <Typography variant={"h2"} className='text-slate-200 mb-3 text-center'>Login</Typography>
         <Textfield label={"Email"} type={email} value={email} required className={"w-full mt-2 shadow bg-slate-300"} placeholder='Email address' onChange={(e) => setEmail(e.target.value)}></Textfield>
         <Textfield label={"Password"} type={password} value={password} required className={"w-full mt-2 shadow bg-slate-300"} placeholder='Password' onChange={(e) => setPassword(e.target.value)}></Textfield>
         <Button loading={load} text={"Login"} disabled={disabled} className={"bg-orange-400 rounded font-semibold mt-10 w-1/2 hover:bg-orange-300"} onClick={handleLogin}>
-        </Button>
+        Login</Button>
        
       </div>
     </div>

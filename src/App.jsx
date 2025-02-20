@@ -5,6 +5,7 @@ import FlexPlayground from './components/Flexplayground.jsx';
 import Listingfromapi from './components/Listingfromapi';
 import Ui from './components/Uicomponents.jsx';
 import Login from './components/Login.jsx'
+import Weather from './pages/Weather.jsx'
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
      <Route path="/listing" element={<Listingfromapi/>}/>
      <Route path="/ui" element={<Ui/>}/>
      <Route path="/login" element={<Login/>}/>
+     <Route path="/weather" element={<Weather/>}/>
       </Routes>
     </Router>
   );
