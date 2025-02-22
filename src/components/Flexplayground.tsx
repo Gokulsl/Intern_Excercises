@@ -1,26 +1,35 @@
 import { useState } from "react";
 import { Trash } from "lucide-react";
 
-const Flexplayground = () => {
-  const [flexDirection, setFlexDirection] = useState("row");
-  const [flexWrap, setFlexWrap] = useState("wrap");
-  const [alignItems, setAlignItems] = useState("flex-start");
-  const [alignContent, setAlignContent] = useState("flex-start");
-  const [justifyContent, setJustifyContent] = useState("flex-start");
-  // ..... 
+type FlexItem = {
+  id: number;
+  order: number;
+  width: number;
+  height: number;
+  flexGrow: number;
+  flexShrink: number;
+  flexBasis: string;
+  alignSelf: string;
+  showSettings: boolean;
+};
 
-  const [activeTab, setActiveTab] = useState("container");
 
-  const [items, setItems] = useState([]);
-
-  const [selectedItem, setSelectedItem] = useState(null);
+const Flexplayground: React.FC = () => {
+  const [flexDirection, setFlexDirection] = useState<React.CSSProperties["flexDirection"]>("row");
+  const [flexWrap, setFlexWrap] = useState<React.CSSProperties["flexWrap"]>("wrap");
+  const [alignItems, setAlignItems] = useState<React.CSSProperties["alignItems"]>("flex-start");
+  const [alignContent, setAlignContent] = useState<React.CSSProperties["alignContent"]>("flex-start");
+  const [justifyContent, setJustifyContent] = useState<React.CSSProperties["justifyContent"]>("flex-start");
+  const [activeTab, setActiveTab] = useState<string>("container");
+  const [items, setItems] = useState<FlexItem[]>([]);
+  const [selectedItem, setSelectedItem] = useState<FlexItem | null>(null);
   
-  const handleItemClick = (itemId) => {
+  const handleItemClick = (itemId: number) => {
     if (selectedItem?.id === itemId) {
       setSelectedItem(null);
       setActiveTab("container");
     } else {
-      const item = items.find((item) => item.id === itemId);
+      const item = items.find((item) => item.id === itemId) || null;
       setSelectedItem(item);
       setActiveTab("items");
     }
@@ -28,7 +37,7 @@ const Flexplayground = () => {
   
 
   const addItem = () => {
-    const newItem = {
+    const newItem: FlexItem = {
       id: Date.now(),
       order: 0,
       width: 130,
@@ -44,28 +53,26 @@ const Flexplayground = () => {
     setSelectedItem(newItem);
   };
 
-  const deleteItem = (id) => {
+  const deleteItem = (id: number) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
     if (selectedItem?.id === id) {
       setSelectedItem(null);
     }
   };
 
-  const updateItem = (id, field, value) => {
+  const updateItem = (id: number, field: keyof FlexItem, value: any) => {
     setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item
-      )
+      prevItems.map((item) => (item.id === id ? { ...item, [field]: value } : item))
     );
 
     if (selectedItem?.id === id) {
-      setSelectedItem((prev) => ({ ...prev, [field]: value }));
+      setSelectedItem((prev) => (prev ? { ...prev, [field]: value } : null));
     }
   };
   return (
     <div className="flex h-screen bg-white pb-5">
       {/* Sidebar */}
-      <div className="w-1/3 p-4 border-2 bg-gradient-to-br  from-purple-500 to-purple-700  overflow-y-auto">
+      <div className="w-1/3 p-4 border-2 bg-gradient-to-br from-purple-500 to-purple-700 overflow-y-auto">
         <div className="flex gap-3 mt-5 mb-4">
           <button
             className={`flex-1 p-3 rounded font-bold ${
@@ -90,9 +97,9 @@ const Flexplayground = () => {
         </div>
 
         {activeTab === "container" ? (
-          <div className="h-full shadow rounded p-3">
+          <div className="shadow rounded p-3 h-200">
             <button
-              className="p-4 px-22 cursor-pointer ms-25 mt-3 mb-3 bg-gray-800 text-white font-bold hover:bg-gray-600 rounded-lg transition-all"
+              className="p-4 px-20 cursor-pointer ms-23 mt-3 mb-3 bg-gray-800 text-white font-bold hover:bg-gray-600 rounded-lg transition-all"
               onClick={addItem}
             >
               Add Item
@@ -108,7 +115,7 @@ const Flexplayground = () => {
             <select
               className="w-full p-2 bg-gray-200 text-gray-900 border rounded mb-3"
               value={flexDirection}
-              onChange={(e) => setFlexDirection(e.target.value)}
+              onChange={(e) => setFlexDirection(e.target.value as React.CSSProperties["flexDirection"])}
             >
               <option value="row">row</option>
               <option value="row-reverse">row-reverse</option>
@@ -120,7 +127,7 @@ const Flexplayground = () => {
             <select
               className="w-full p-2 text-gray-900 bg-gray-200 border rounded mt-4 mb-3"
               value={flexWrap}
-              onChange={(e) => setFlexWrap(e.target.value)}
+              onChange={(e) => setFlexWrap(e.target.value as React.CSSProperties["flexWrap"])}
             >
               <option value="wrap">wrap</option>
               <option value="nowrap">no-wrap</option>
@@ -250,11 +257,11 @@ const Flexplayground = () => {
       <div
         className="w-2/3  border-2 m-2 border-black p-4 overflow-hidden flex items-center justify-center flex-wrap"
         style={{
-          flexDirection,
-          flexWrap,
-          justifyContent,
-          alignItems: alignItems || "flex-start",
-          alignContent: alignContent || "flex-start",
+          flexDirection: flexDirection,
+          flexWrap: flexWrap ,
+          justifyContent: justifyContent ,
+          alignItems: alignItems ,
+          alignContent: alignContent ,
         }}
       >
         {items.map((item, index) => (

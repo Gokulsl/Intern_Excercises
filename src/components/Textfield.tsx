@@ -1,14 +1,23 @@
 import React from "react";
 
+type TextfieldProps = {
+  label?: string;
+  type?: string;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 const Textfield = ({
-  label,
+  label ="",
   type = "text",
   placeholder = "",
   className = "",
   disabled = false,
   value = "",
   onChange = () => {},
-}) => {
+}: TextfieldProps) => {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={label} className="text-md font-medium text-slate-300  mt-3">

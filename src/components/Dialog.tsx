@@ -1,6 +1,14 @@
 import React from 'react';
-
-const Dialog = ({ isOpen, onClose, title, children, confirmText = "Confirm", cancelText = "Cancel", onConfirm }) => {
+type DialogProps = {
+  isOpen?: boolean;
+  onClose?: () => void;
+  title?: string;
+  children?: React.ReactNode;
+  confirmText?: string;
+  cancelText?: string;
+  onConfirm?: () => void;
+}
+const Dialog = ({ isOpen, onClose, title, children, confirmText = "Confirm", cancelText = "Cancel", onConfirm }:DialogProps) => {
   if (!isOpen) return null;
 
   return (

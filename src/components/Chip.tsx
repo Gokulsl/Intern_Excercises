@@ -1,7 +1,13 @@
-import React from "react";
+
 import { X } from "lucide-react";
 
-const Chip = ({ label, onRemove, color = "blue", className = "" }) => {
+type ChipProps = {
+  label?: string;
+  onRemove?: () => void;
+  color?: "blue" | "purple" | "red";
+  className?: string;
+}
+const Chip = ({ label, onRemove, color = "blue", className = "" }:ChipProps) => {
   const chipColors = {
     blue: "bg-blue-100 text-blue-800 border-blue-300",
     purple: "bg-purple-200 text-purple-800 border-purple-300",

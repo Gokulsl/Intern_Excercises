@@ -1,6 +1,12 @@
-import React from "react";
-
-const Checkbox = ({ name, label, checked, onChange, disabled = false, className = "" }) => {
+type CheckboxProps = {
+  name?: string;
+  label?: string;
+  checked?: boolean;
+  onChange?: () => void;
+  disabled?: boolean;
+  className?: string;
+}
+const Checkbox = ({ name, label, checked, onChange, disabled = false, className = "" }: CheckboxProps) => {
   return (
     <div>
       <label
