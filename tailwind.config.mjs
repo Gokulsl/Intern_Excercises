@@ -1,8 +1,7 @@
-// tailwind.config.mjs
 import { defineConfig } from 'tailwindcss';
-
+const {heroui} = require("@heroui/react");
 export default defineConfig({
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html",  "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",],
   theme: {
     extend: {
       fontSize: {
@@ -10,11 +9,12 @@ export default defineConfig({
         '7xl': '5rem', // Custom larger size
         '8xl': '6rem',
       },
+      darkMode: "class",
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         mont: ['Montserrat', 'sans-serif'],
       },
     },
   },
-  plugins: [],
+  plugins: [heroui()],
 });

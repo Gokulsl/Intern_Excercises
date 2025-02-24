@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Typography from '../common/Typography';
-import Textfield from '../common/Textfield';
+import Typography from '../common/TypoGraphy';
+import Textfield from '../common/TextField';
 import Button from '../common/Button';
 
 const Login: React.FC = () => {

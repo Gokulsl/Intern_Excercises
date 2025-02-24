@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Button from "../common/Button";
-import Checkbox from "../common/Checkbox";
-import Dropdown from "../common/Dropdownmenu";
-import Textfield from "../common/Textfield";
+import Checkbox from "../common/CheckBox";
+import Dropdown from "../common/DropDownMenu";
+import Textfield from "../common/TextField";
 import Chip from "../common/Chip";
-import Typography from "../common/Typography";
+import Typography from "../common/TypoGraphy";
 import Dialog from "../common/Dialog";
 import Loading from "../common/Loading";
 import ComponentCard from "../common/Card";
@@ -104,7 +104,7 @@ const UiComponents: React.FC = () => {
               onChange={setSelected}
               className="w-40 bg-orange-300  hover:bg-orange-200"
             />
-            <Dropdown options={options} title="Click me" disabled className="w-40 bg-orange-200 text-gray-300" />
+            <Dropdown options={options} title="Click me" disabled className="w-40 bg-orange-100 text-gray-300" />
           </div>
         </ComponentCard>
 
