@@ -3,7 +3,7 @@ import { Search, Droplets, Wind } from "lucide-react";
 // import WeatherImg from "../assets/weatherimg.png";
 import Loading from "../common/Loading";
 
-interface WeatherData {
+interface weatherData {
   main: {
     temp: number;
     humidity: number;
@@ -18,7 +18,7 @@ interface WeatherData {
 
 const Weather: React.FC = () => {
   const [search, setSearch] = useState<string>("");
-  const [city, setCity] = useState<WeatherData | null>(null);
+  const [city, setCity] = useState<weatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [showWeather, setShowWeather] = useState<boolean>(false);

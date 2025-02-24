@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDownIcon } from "lucide-react";
 
-interface DropdownProps {
+interface dropDownProps {
   options: { label: string; to: string }[];
   disabled?: boolean;
   className?: string;
@@ -16,7 +16,7 @@ const DropDownMenu = ({
   disabled = false,
   className = "",
   title = "Exercises",
-}: DropdownProps) => {
+}: dropDownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(title);
   const dropdownRef = useRef<HTMLDivElement>(null);
