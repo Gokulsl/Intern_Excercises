@@ -11,7 +11,7 @@ interface DropdownProps {
   onChange?: (option: string) => void;
 }
 
-const Dropdownmenu = ({
+const DropDownMenu = ({
   options,
   disabled = false,
   className = "",
@@ -41,7 +41,7 @@ const Dropdownmenu = ({
   return (
     <div ref={dropdownRef} className={`relative rounded ${className}`}>
       <button
-        className={`flex items-center justify-center gap-x-1.5 rounded px-3 py-2 font-semibold shadow-md border border-gray-300 text-slate-700 hover:bg-gray-100 transition ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+        className={`flex items-center justify-center gap-x-1.5 rounded px-3 py-2 font-semibold shadow-md border border-gray-300 text-slate-800 hover:bg-gray-100 transition ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
           } ${className}`}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
@@ -56,7 +56,7 @@ const Dropdownmenu = ({
             <Link
               key={index}
               to={option.to}
-              className="block px-5 py-4 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition"
+              className="block px-5 py-4 text-gray-600 hover:bg-gray-100 hover:text-gray-700 transition"
               onClick={() => handleSelection(option.label)}
             >
               {option.label}
@@ -68,4 +68,4 @@ const Dropdownmenu = ({
   );
 };
 
-export default Dropdownmenu;
+export default DropDownMenu;

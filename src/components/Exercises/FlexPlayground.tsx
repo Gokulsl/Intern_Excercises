@@ -14,7 +14,7 @@ type FlexItem = {
 };
 
 
-const Flexplayground: React.FC = () => {
+const FlexPlayground: React.FC = () => {
   const [flexDirection, setFlexDirection] = useState<React.CSSProperties["flexDirection"]>("row");
   const [flexWrap, setFlexWrap] = useState<React.CSSProperties["flexWrap"]>("wrap");
   const [alignItems, setAlignItems] = useState<React.CSSProperties["alignItems"]>("flex-start");
@@ -305,4 +305,4 @@ const Flexplayground: React.FC = () => {
   );
 };
 
-export default Flexplayground;
+export default FlexPlayground;

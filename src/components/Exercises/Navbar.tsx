@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Dropdownnew from "./Dropdownmenu";
+import Dropdownnew from "../common/Dropdownmenu";
 
 interface DropdownOption {
   value: string;

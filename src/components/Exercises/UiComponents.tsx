@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Button from "./Button";
-import Checkbox from "./Checkbox";
-import Dropdown from "./Dropdownmenu";
-import Textfield from "./Textfield";
-import Chip from "./Chip";
-import Typography from "./Typography";
-import Dialog from "./Dialog";
-import Loading from "./Loading";
-import ComponentCard from "./Card";
+import Button from "../common/Button";
+import Checkbox from "../common/Checkbox";
+import Dropdown from "../common/Dropdownmenu";
+import Textfield from "../common/Textfield";
+import Chip from "../common/Chip";
+import Typography from "../common/Typography";
+import Dialog from "../common/Dialog";
+import Loading from "../common/Loading";
+import ComponentCard from "../common/Card";
 
 interface CheckboxState {
   webDev: boolean;
@@ -21,7 +21,7 @@ interface Option {
   label: string;
 }
 
-const UIComponents: React.FC = () => {
+const UiComponents: React.FC = () => {
   const [checkboxState, setCheckboxState] = useState<CheckboxState>({
     webDev: false,
     backendDev: false,
@@ -102,9 +102,9 @@ const UIComponents: React.FC = () => {
               title="Click me"
               value={selected}
               onChange={setSelected}
-              className="w-40 bg-orange-400  hover:bg-orange-300"
+              className="w-40 bg-orange-300  hover:bg-orange-200"
             />
-            <Dropdown options={options} title="Click me" disabled className="w-40 bg-orange-300 text-gray-300" />
+            <Dropdown options={options} title="Click me" disabled className="w-40 bg-orange-200 text-gray-300" />
           </div>
         </ComponentCard>
 
@@ -178,4 +178,4 @@ const UIComponents: React.FC = () => {
   );
 };
 
-export default UIComponents;
+export default UiComponents;

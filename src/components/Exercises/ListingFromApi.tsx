@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Loading from "./Loading";
+import Loading from "../common/Loading";
 
 interface Country {
   name: {
@@ -22,7 +22,7 @@ interface Country {
   };
 }
 
-const Listingfromapi: React.FC = () => {
+const ListingFromApi: React.FC = () => {
   const [data, setData] = useState<Country[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -59,4 +59,4 @@ const Listingfromapi: React.FC = () => {
   );
 };
 
-export default Listingfromapi;
+export default ListingFromApi;

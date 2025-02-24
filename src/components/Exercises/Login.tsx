@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Typography from './Typography';
-import Textfield from './Textfield';
-import Button from './Button';
+import Typography from '../common/Typography';
+import Textfield from '../common/Textfield';
+import Button from '../common/Button';
 
 const Login: React.FC = () => {
     const EMAIL = "gokulnath@steinnlabs.com";

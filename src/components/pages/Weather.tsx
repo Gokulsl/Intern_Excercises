@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Search, Droplets, Wind } from "lucide-react";
 // import WeatherImg from "../assets/weatherimg.png";
-import Loading from "../components/Loading";
+import Loading from "../common/Loading";
 
 interface WeatherData {
   main: {
