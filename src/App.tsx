@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { QueryClientProvider, QueryClient } from'@tanstack/react-query';
 import Home from './components/pages/Home.js';
 import Navbar from './components/Exercises/Navbar.js';
 import FlexPlayground from './components/Exercises/FlexPlayground.js'
@@ -8,7 +8,9 @@ import Ui from './components/Exercises/UiComponents.js';
 import Login from './components/Exercises/Login.js'
 import Weather from './components/pages/Weather.js'
 const App: React.FC = () => {
+  const queryClient = new QueryClient();
   return (
+    <QueryClientProvider client={queryClient}>
     <Router>
       <Navbar />
       <Routes>
@@ -21,6 +23,7 @@ const App: React.FC = () => {
       </Routes>
       
     </Router>
+    </QueryClientProvider>
   );
 }
 
