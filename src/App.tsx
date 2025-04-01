@@ -7,10 +7,13 @@ import Listingfromapi from './components/Exercises/ListingFromApi.js'
 import Ui from './components/Exercises/UiComponents.js';
 import Login from './components/Exercises/Login.js'
 import Weather from './components/pages/Weather.js'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 const App: React.FC = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false}/> 
     <Router>
       <Navbar />
       <Routes>

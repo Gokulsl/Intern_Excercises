@@ -1,7 +1,9 @@
-import React from "react";
+import React, {Suspense} from "react";
 import Loading from "../common/Loading";
 import { useQuery } from "@tanstack/react-query";
+import { FixedSizeGrid as Grid } from "react-window";
 
+const CountryCard = React.lazy(() => import("./CountryCard"));
 interface Country {
   name: {
     common: string;
@@ -11,12 +13,14 @@ interface Country {
     svg: string;
   };
 }
+interface NewCountry{
+  name:string,
+  flag:string,
+  officialName:string
 
-interface NewCountry {
-  name: string;
-  flag: string;
-  officialName: string;
 }
+
+
 
 const fetchData = async (): Promise<Country[]> => {
   const res = await fetch("https://restcountries.com/v3.1/all");
@@ -26,15 +30,6 @@ const fetchData = async (): Promise<Country[]> => {
   return res.json();
 };
 
-const CountryCard: React.FC<{ country: NewCountry }> = ({ country }) => (
-  <div className="m-3 border-2 border-black bg-gray-800 w-80 h-[230px] p-3 rounded-lg">
-    <div className="flex flex-col items-center justify-center">
-      <img src={country.flag} alt="flag" className="h-32 rounded-lg" loading="lazy" />
-      <h1 className="font-bold text-center text-white mt-2">{country.name}</h1>
-      <p className="font-medium text-gray-300 text-center mt-2">{country.officialName}</p>
-    </div>
-  </div>
-);
 
 const ListingFromApi: React.FC = () => {
   const { data: countries = [], isLoading, error } = useQuery<Country[], Error, NewCountry[]>({
@@ -51,25 +46,44 @@ const ListingFromApi: React.FC = () => {
     placeholderData: [],
   });
 
-  return (
-    <div>
-      <div className="flex justify-around pt-6 pb-6 items-center bg-gradient-to-br from-purple-500 to-purple-700 flex-wrap">
-        {isLoading && (
-          <div className="flex justify-around h-160 items-center flex-wrap">
-            <Loading size="w-20 h-20" color="border-orange-400" />
-          </div>
-        )}
-
-        {error && (
-          <div className="flex justify-around h-160 items-center flex-wrap">
-            <h1 className="text-white text-2xl">Error: {error.message}</h1>
-          </div>
-        )}
-
-        {!isLoading && !error && countries.map((c, index) =>
-           <CountryCard key={index} country={c} />
-           )}
+  if (isLoading) {
+    return (
+      <div className="flex justify-around h-160 items-center flex-wrap">
+        <Loading size="w-20 h-20" color="border-orange-400" />
       </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-around h-160 items-center flex-wrap">
+        <h1 className="text-white text-2xl">Error: {error.message}</h1>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-[658px] flex justify-center items-center bg-gradient-to-br from-purple-500 to-purple-700 py-6">
+      <Grid
+        height={600} 
+        width={1220} 
+        columnCount={3}
+        columnWidth={400} 
+        rowHeight={250} 
+        rowCount={Math.ceil(countries.length / 3)} 
+      >
+        {({ columnIndex, rowIndex, style }) => {
+          const index = rowIndex * 3 + columnIndex;
+          if (index >= countries.length) return null;
+          return (
+            <div style={style}>
+               <Suspense fallback={<Loading size="w-20 h-20" color="border-orange-400" />}>
+              <CountryCard country={countries[index]} />
+              </Suspense>
+            </div>
+          );
+        }}
+      </Grid>
     </div>
   );
 };
